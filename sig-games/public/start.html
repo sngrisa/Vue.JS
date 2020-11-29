@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./css/style.css">
+	<title> Escribir Nombres </title>
+	<link rel="icon" href="https://cdn.pixabay.com/photo/2016/03/31/18/39/icon-1294533_960_720.png">
+</head>
+<body>
+	<h1 style="text-align: center; background-color:black; color: whitesmoke;">SiG Software</h1>
+	<h4 style="text-align: center;"><a href="./index.html"> Regresar </a></h4>
+	<main id="apk">
+	   <h2 style="text-align: center;">{{message}}</h2>
+	   <h3 style="text-align: center;"><input type="text" v-model="message"></h3>
+	   <h5 style="text-align: center;">Verificacion de ingreso de datos:</h5>  
+	   <h4 style="text-align: center;"><pre>
+		 <code>{{$data}}</code>
+	     </pre>
+	    </h4>
+	</main>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script>
+	   
+	   new Vue({
+		   el: "#apk",
+		   data:{
+			  message: "Hola, prueba con Vue.JS" 
+		   }
+	   })
+	</script>
+	<script>
+		//Vanilla JS
+       //const input=document.querySelector('input'),
+	   //h2=document.querySelector('h2');
+
+	   //input.addEventListener('keyup', () => h2.innerHTML = input.value);
+	</script>
+</body>
+</html>

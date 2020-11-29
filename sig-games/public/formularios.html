@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="../node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css">
+	<title> SiG Software / Registrar Usuario </title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2016/03/31/18/39/icon-1294533_960_720.png">
+    <style>
+        .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 0;
+    }
+    </style>
+</head>
+<body>
+    <main id="user">
+        <h1 style="text-align: center;">Formulario de Usuario:</h1>
+    <h4 style="text-align: center;">Para registrarse llene los siguientes campos del formulario de usuarios :</h4>
+    <form id="ContactForm" class="ContactForm" @submit.prevent="sendForm">
+        <div style="text-align: center;">
+            <h5>Nombre de usuario:</h5>
+            <input type="text" name="nombre" title="Nombre de Usuario" placeholder="Ingrese el Nombre de Usuario que desee utilizar"required>
+            <h5>Correo Electronico:</h5>
+            <input type="email" name="email" title="Correo Electronico"placeholder="Ingrese su correo electronico" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z09-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$"required>
+            <h5> Telefono:</h5>
+            <input type="tel" name="telefono" title="Telefono" placeholder="Ingrese su numero telefonico" pattern="^[0-9]+$"required>
+            <h5>Contraseña:</h5>
+            <input type="password" name="contraseña" title="Contraseña" placeholder="Ingrese la contraseña"required>
+            <h5>Confirmar Contraseña:</h5>
+            <input type="password" name="confirmcontraseña" title="Confirmacion de Contraseña" placeholder="Confirme su contraseña"required>
+            <br>
+            </br>
+            <p style="color:darkblue">
+                Al presionar el boton registrarse esta de acuerdo con nuestras politicas y derechos de uso en nuestra pagina web.
+            </p>
+            <input type="submit" value="Registrarse">
+            <br>
+            </br>
+            <a href="./index.html"> Voler a la pagina de Login de Usuarios </a>
+        </div>
+    </form>
+    </main> 
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const mv=new Vue({
+            el: "user",
+            data:{
+                formType: true,
+                message:{
+                    nombre:"",
+                    email:"",
+                    telefono:"",
+                    contraseña:"",
+                    confirmcontraseña:"",
+                    serverResponse:"",
+                },
+                services:[
+                    {id:null, name:'Selecciona un servicio'},
+                    {id: 1,name: 'Diseño Grafico'},
+                    {id: 2, name: 'Diseño Web'},
+                    {id: 3, name: 'Programacion Web'},
+                    {id: 4, name: 'Programacion Movil'},
+                    {id: 5, name: 'Marketing Digital'}
+                ],
+                formats:{
+                    nombre:"",
+                    email:"",
+                },
+                serverResponse: false
+            }
+        });
+    </script>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

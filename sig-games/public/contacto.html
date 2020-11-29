@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initialscale=1.0">
+        <link rel="stylesheet" href="../node_modules/boostrap/dist/css/boostrap.min.css">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="../node_modules/open-iconic/font/css/open-iconic.min.css">
+    
+        <title> SiG Software / Contacto </title>
+        <link rel="icon" href="https://cdn.pixabay.com/photo/2016/03/31/18/39/icon-1294533_960_720.png">
+        <style>
+            .fade-enter-active, .fade-leave-active {
+          transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+          opacity: 0;
+        }
+        </style>
+    </head>
+
+    <body>
+        <main id="app">
+            <div class="container content" style="text-align: center;">
+                    <br>
+                    </br>
+                    <a href="./index.html"> Volver a la pagina de Principal</a>
+                    <form id="ContactoForm" class="ContactoForm">
+                    <p class="pt-3" style="background-color: black; color: whitesmoke;"> Complete los siguientes formularios para enviar su consulta: </p>
+                    <br>
+                    <div style="text-align: center;">
+                        <h5> Seleccione el tipo de consulta:</h5>
+                        <br>
+                        </br>
+                        <input v-model="formType" :value="true" name="formType" type="radio" id="opinion">
+                        <label for="opinion">Opinion </label>
+                        <input v-model="formType" :value="false" name="formType" type="radio" id="presupuesto">
+                        <label for="presupuesto">Servicios a tratar </label>
+                    </div>
+                    </br>
+                    <h5> Nombre: </h5>
+                    <input type="text" id="name" name="name" title="nombre" style="width:500px" placeholder="Ingrese su nombre" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"required>
+                    <h5> Apellido: </h5>
+                    <input type="text" id="lastname" name="lastname" title="apellido" style="width:500px" placeholder="Ingrese su apellido" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"required>
+                    <h5> Correo Electronico </h5>
+                    <input type="email" id="email" name="email" title="email" style="width:500px" placeholder="Ingrese su correo electronico" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z09-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$"required>
+                    <template v-if="!formType">
+                        <h5> Telefono: </h5>
+                        <input type="tel" id="tel" name="tel" title="telefono" style="width:500px" placeholder="Ingrese su numero telefonico" pattern="^[0-9]+$"required>
+                        <br>
+                        </br>
+                        <h5> Seleccione el area a tratar:</h5>
+                        <select id="services "name="services" style="width:500px" required>
+                            <option v-for="service in services" :value="service.id" v.text="service.name"> </option>
+                        </select>
+                    </template>
+                    <template v-else>
+                        <h5> Detalles de la consulta: </h5>
+                        <input type="text" id="asunto" name="asunto" style="width:500px" placeholder="Ingrese el asunto de la consulta" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"required>
+                        <br>
+                        </br>
+                        <textarea type="text" id="comments" name="comments" title="Comentarios" style="width:500px; height:100px;" placeholder="Ingrese el detalle de la consulta" required></textarea>
+                    </template>
+                    <br>
+                    </br>
+                    <button type="submit" style="background-color: black; color: whitesmoke;">Enviar Consulta</button>
+                </form>
+            </div>
+            <pre>{{$data}}</pre>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script>
+            const mv = new Vue({
+                el: '#app',
+                data:{
+                    formType: true,
+                    message:{
+                        name:'',
+                        lastname:'',
+                        email:'',
+                        tel:'',
+                        asunto:'',
+                        comments:'',
+                        serverResponse:''
+                    },
+                services:[
+                    {id: null, name:'Selecciona un area a tratar'},
+                    {id: 1, name:'Diseño Grafico'},
+                    {id: 2, name:'Diseño Web'},
+                    {id: 3, name:'Programacion Web'},
+                    {id: 4, name:'Programacion Movil'},
+                    ]
+                },
+                formats:{
+                    name:'',
+                    email:'',
+                },
+                serverResponse: false,
+            });
+        </script>
+    </body>
+</html>
