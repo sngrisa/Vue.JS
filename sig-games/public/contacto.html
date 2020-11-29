@@ -37,11 +37,29 @@
                         <input v-model="formType" :value="false" name="formType" type="radio" id="presupuesto">
                         <label for="presupuesto">Servicios a tratar </label>
                     </div>
+                    <br>
                     </br>
+                    <legend>Formulario de <span>{{formTitle}}</span></legend>
                     <h5> Nombre: </h5>
-                    <input type="text" id="name" name="name" title="nombre" style="width:500px" placeholder="Ingrese su nombre" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"required>
+                    <input 
+                    @keyup="validateData"
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    title="nombre" 
+                    style="width:500px" 
+                    placeholder="Ingrese su nombre" 
+                    pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"required>
                     <h5> Apellido: </h5>
-                    <input type="text" id="lastname" name="lastname" title="apellido" style="width:500px" placeholder="Ingrese su apellido" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"required>
+                    <input 
+                    @keyup="validateData"
+                    type="text" 
+                    id="lastname" 
+                    name="lastname" 
+                    title="apellido" 
+                    style="width:500px" 
+                    placeholder="Ingrese su apellido" 
+                    pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"required>
                     <h5> Correo Electronico </h5>
                     <input type="email" id="email" name="email" title="email" style="width:500px" placeholder="Ingrese su correo electronico" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z09-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$"required>
                     <template v-if="!formType">
@@ -50,8 +68,12 @@
                         <br>
                         </br>
                         <h5> Seleccione el area a tratar:</h5>
-                        <select id="services "name="services" style="width:500px" required>
-                            <option v-for="service in services" :value="service.id" v.text="service.name"> </option>
+                        <select name="services" style="width:500px" required>
+                            <option 
+                            v-for="service in services" 
+                            :value='service.id' 
+                            v-text='service.name'>
+                            </option>
                         </select>
                     </template>
                     <template v-else>
@@ -65,6 +87,9 @@
                     </br>
                     <button type="submit" style="background-color: black; color: whitesmoke;">Enviar Consulta</button>
                 </form>
+                <br>
+                </br>
+                <p>(c) 2020 SiG Software. Todos los derechos reservados. www.sigsoftware.com.ar </p>
             </div>
             <pre>{{$data}}</pre>
         </main>
@@ -89,13 +114,44 @@
                     {id: 2, name:'Diseño Web'},
                     {id: 3, name:'Programacion Web'},
                     {id: 4, name:'Programacion Movil'},
-                    ]
-                },
+                    {id: 5, name: 'Programacion con Consolas'}
+                    ],
                 formats:{
                     name:'',
                     email:'',
                 },
                 serverResponse: false,
+                },
+                computed:{
+                    formTitle(){
+                        return(this.formType) ?'opinion': 'presupuesto'
+                    }
+                },
+                methods:{
+
+                    validateData(e){
+                        let input = e.target,
+                        expression
+
+                        if(input.pattern){
+                            let regex = new RegExp(input.pattern)
+                            expression = !regex.exec(input.value)
+                        }else{
+                            expression = !input.value
+                        }
+
+                        if(expression){
+                        this.message[input.name] = `Dato Incorrecto, ${input.title}`
+                        this.message[input.lastname] =`Dato Incorrecto, ${input.title}`
+                        }else{
+                            this.message[input.name] = ''
+                            this.message[input.lastname]= ''
+                        }
+                    },
+                    sendForm(e){
+
+                    },
+                }
             });
         </script>
     </body>
